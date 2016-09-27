@@ -1,6 +1,9 @@
 /* реализацию см. на: http://phonebook.pa.infobox.ru/
 */
-
+// автоопределение города на стартовой странице
+window.onload = function () {
+      $("#myCity").text(ymaps.geolocation.city);
+}
 $(function(){
     // переключалка формы для добавления новой записи в справочник
    	$("#toggleInsertForm").click( function()  {
