@@ -1,6 +1,5 @@
 var $window;
 
-// на некоторых модалках крестик должен быть внутри
 $(document).ready(function(){
 	var modals = $('.modal');
 	for(var i=0; i<modals.length; i++){
@@ -13,7 +12,7 @@ $(document).ready(function(){
 			$(modals[i]).removeClass('for-outer-cross').addClass('for-inner-cross');
 		}
 	}
-	/* Стрелочка вверх */
+	// up arrow
 	$('#scrollup').click( function vverh(){
 		window.scrollBy(0,-$(document).height()/4); // чем меньше значение по оси Y, тем выше скорость перемещения
 		//if (window.pageYOffset > 0) {requestAnimationFrame(vverh);} // плавная скорость перемещения (может потом понадобиться)
@@ -27,7 +26,7 @@ $(document).ready(function(){
 		}
 	});
 
-	// когда загрузится картинка Специальная акция
+	// Special action
 	if ($('#special img').size()){
 		var specialInterval = setInterval(function(){
 			var specTop = $(window).height()/2- $('#special').height()/2;
@@ -40,19 +39,13 @@ $(document).ready(function(){
 
 	$(".inputCountMask").inputmask();
 
-	/*	var i = new Image();
-	i.onload = function () {
-
-	};
-	i.src = '../img/speсial_action-yellow.png';*/
-	//$('#special-img').src = '/assets/theme/mirsushi.com/img/speсial_action-yellow.png';
 });
 
 $(function(){
 
 	$window = $(window);
 
-// определить мобильную платформу и поставить нужную ссылку на мобильное приложение
+// detect mobile OS and choose properly link
 	var isMobile = {
 		Android: function() {
 			return navigator.userAgent.match(/Android/i);
@@ -90,11 +83,6 @@ $(function(){
 		$("#download-app").attr('href', mobileAppHref).find('.apps').addClass(mobileClass);
 	}
 
-
-	if ($(window).width() < 768) {
-		$(".close").removeClass('cross-outer').addClass('cross-inner');
-		$(".modal").removeClass('for-outer-cross').addClass('for-inner-cross-sm');
-	}
 
 	var posY;
 	$('#header-slider').slick({
@@ -293,12 +281,6 @@ $(function(){
 		$target = $($(document).find('.starter-page-container-box-link a'));
 		$target.attr('href', $href);
 	});
-/*
-	$(document).find(".cabinet-data-social-container-box li.active a")
-	.text(function(i, text){
-        return (text === "прикрепить") ? "открепить" : "прикрепить";
-    });
-*/
 
 	// modal fix
 	$(document).on("show.bs.modal", function(e){
@@ -433,7 +415,7 @@ $(function(){
 		$(document).find('.mm-city-link').parent().removeClass('active');
     });
 
-// плавная прокрутка до любого элемента, например до меню на мобильной версии
+// smooth scrolling to any element, for example to the menu on the mobile version
 	$('a[href^="##"]').click(function () {
 		var elementClick = $(this).attr("href");
 		var $anchor = $("[name='" + elementClick + "']");
@@ -441,42 +423,12 @@ $(function(){
 		$('html, body').animate({scrollTop: destination}, 1000);
 		return false;
 	});
-	// вызов модалки выбора подарка
+	// select gift modal
 	$(document).on('click', 'a[data-target="#gift-modal"]', function () {
 		textCrop();
 	});
 
 
-
-	// $("form").each(function() {
-	// 	$(this).validate({
-	// 		rules: {
-	// 			name: {
-	// 				required: true
-	// 			},
-	// 			email: {
-	// 				email: true,
-	// 				required: true
-	// 			},
-	// 			text: {
-	// 				required: true
-	// 			},
-	// 			phone: {
-	// 				required: true,
-	// 				minlength: 10
-	// 			},
-	// 			code: {
-	// 				required: true
-	// 			}
-	// 		},
-	// 		highlight: function(element) {
-	// 			$(element).closest('.form-group').removeClass("has-success").addClass('has-error');
-	// 		},
-	// 		unhighlight: function(element) {
-	// 			$(element).closest('.form-group').removeClass('has-error').addClass("has-success");
-	// 		}
-	// 	});
-	// });
 });
 
 $(function(){
@@ -506,6 +458,7 @@ $(function(){
 
 });
 
+// text croping
 function textCrop() {
 	var $this;
 	var $newsContent = $('.cat-item-text, .mob-cat-item-text');
@@ -533,7 +486,7 @@ function preloaderKill() {
 	},1500);
 }
 
-// таймер обратного отсчета
+// count-down timer
 function updateClock(){
 	if ($(".side-nav .timer").size()) {
 		var clock = $(".side-nav #timer-num");
@@ -550,7 +503,7 @@ function updateClock(){
 		--remainTime;
 	}
 }
-// сколько времени осталось от текущего до конечного
+
 function getTimeRemaining(t){
 	var minutes = Math.ceil(t / 60);
 	var seconds = Math.floor(t % 60);
@@ -600,31 +553,7 @@ function toclipboard(){
 	});
 }
 
-
-
-// очень полезная функция для вывода массива в алерт!
-// синтаксис: alert(print_r(myArray));
-function print_r(arr, level) {
-	var print_red_text = "";
-	if(!level) level = 0;
-	var level_padding = "";
-	for(var j=0; j<level+1; j++) level_padding += "    ";
-	if(typeof(arr) == 'object') {
-		for(var item in arr) {
-			var value = arr[item];
-			if(typeof(value) == 'object') {
-				print_red_text += level_padding + "'" + item + "' :\n";
-				print_red_text += print_r(value,level+1);
-			}
-			else
-				print_red_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
-		}
-	}
-
-	else  print_red_text = "===>"+arr+"<===("+typeof(arr)+")";
-	return print_red_text;
-}
-// размер шрифта при резиновой верстке (Специальная акция)
+// font size for flexible (special action)
 (function($) {
 	$.fn.textfill = function(options) {
 		var fontSize = options.maxFontPixels;
